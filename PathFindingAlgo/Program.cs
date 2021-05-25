@@ -28,19 +28,15 @@ namespace PathFindingAlgo
             for (var i = 0; i < x * y; i++)
                 blocks[i % x, i / x] = new Block(false);
 
-            for (var i = 0; i < blocks.GetLength(0); i++)
+            for (var i = 0; i < x; i++)
                 blocks[i, 5] = new Block(true);
 
-            for (var i = 0; i < blocks.GetLength(0); i++)
+            for (var i = 0; i < x * y; i++)
             {
-                for (var j = 0; j < blocks.GetLength(1); j++)
-                {
-                    Console.Write(blocks[i, j].ToString() + " ");
-                }
-
-                Console.WriteLine();
+                if (i % 10 == 0)
+                    Console.WriteLine();
+                Console.Write(blocks[i / x, i % x]);
             }
-
         }
     }
 }
