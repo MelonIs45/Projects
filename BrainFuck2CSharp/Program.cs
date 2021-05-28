@@ -1,4 +1,5 @@
-﻿ using System;
+﻿using System;
+using System.IO;
 
 namespace BF2CS
 {
@@ -6,8 +7,8 @@ namespace BF2CS
     {
         static void Main(string[] args)
         {
-            // 99 bottles of beer unit test, i didn't write this xD
-            string bf = @">++++++++++[<++++++++++>-]<->>>>>+++[>+++>+++<<-]<<<<+<[>[>+
+            // 99 bottles of beer unit test, Code written by Jim Crawford.
+            string bfExample = @">++++++++++[<++++++++++>-]<->>>>>+++[>+++>+++<<-]<<<<+<[>[>+
                         >+<<-]>>[-<<+>>]++++>+<[-<->]<[[-]>>-<<]>>[[-]<<+>>]<<[[-]>>
                         >>>>[[-]<++++++++++<->>]<-[>+>+<<-]>[<+>-]+>[[-]<->]<<<<<<<<
                         <->>]<[>+>+<<-]>>[-<<+>>]+>+<[-<->]<[[-]>>-<<]>>[[-]<<+>>]<<
@@ -39,7 +40,10 @@ namespace BF2CS
                         -]<[-]>]<+<]";
 
             byte[] tape = new byte[10000];
-            char[] data = bf.ToCharArray();
+            char[] data = bfExample.ToCharArray();
+
+            if (args.Length > 0)
+                data = File.ReadAllText(args[0]).ToCharArray(); // Uses bf code from file if passed in
 
             int bracketCount = 0;
             int ptr = 0;
@@ -96,6 +100,8 @@ namespace BF2CS
                         break;
                 }
             }
+            Console.WriteLine("\nPress any character to exit. ");
+            Console.ReadLine();
         }
     }
 }
