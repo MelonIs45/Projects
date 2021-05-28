@@ -6,7 +6,7 @@ namespace BF2CS
     {
         static void Main(string[] args)
         {
-            // 99 bottles of beer unit test
+            // 99 bottles of beer unit test, i didn't write this xD
             string bf = @">++++++++++[<++++++++++>-]<->>>>>+++[>+++>+++<<-]<<<<+<[>[>+
                         >+<<-]>>[-<<+>>]++++>+<[-<->]<[[-]>>-<<]>>[[-]<<+>>]<<[[-]>>
                         >>>>[[-]<++++++++++<->>]<-[>+>+<<-]>[<+>-]+>[[-]<->]<<<<<<<<
@@ -64,7 +64,7 @@ namespace BF2CS
                         Console.Write((char)tape[ptr]); // Writes the ASCII character for the value in the cell
                         break;
                     case ',':
-                        tape[ptr] = (byte)Console.ReadKey().KeyChar; // Sets the value in the cell to a user input
+                        tape[ptr] = (byte)Console.ReadKey().KeyChar; // Sets the value in the cell to the user input
                         break;
                     case '[':
                         if (tape[ptr] == 0)
@@ -72,7 +72,7 @@ namespace BF2CS
                             bracketCount++;
                             while (data[i] != ']' || bracketCount != 0)
                             {
-                                i++; // Goes to the end of the data
+                                i++; // Goes to the end of the bracket
                                 if (data[i] == '[')
                                     bracketCount++;
                                 else if (data[i] == ']')
@@ -86,7 +86,7 @@ namespace BF2CS
                             bracketCount++;
                             while (data[i] != '[' || bracketCount != 0)
                             {
-                                i--; // Goes back to the start of the first bracket
+                                i--; // Goes back to the start of the bracket
                                 if (data[i] == ']')
                                     bracketCount++;
                                 else if (data[i] == '[')
