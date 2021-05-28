@@ -1,0 +1,13 @@
+\\pfa.education\utccstudentusers$\18u-rpietras\Documents\Repos\BF2CS\bin\Debug\netcoreapp3.1\BF2CS.exe
+\\pfa.education\utccstudentusers$\18u-rpietras\Documents\Repos\BF2CS\bin\Debug\netcoreapp3.1\BF2CS.deps.json
+\\pfa.education\utccstudentusers$\18u-rpietras\Documents\Repos\BF2CS\bin\Debug\netcoreapp3.1\BF2CS.runtimeconfig.json
+\\pfa.education\utccstudentusers$\18u-rpietras\Documents\Repos\BF2CS\bin\Debug\netcoreapp3.1\BF2CS.runtimeconfig.dev.json
+\\pfa.education\utccstudentusers$\18u-rpietras\Documents\Repos\BF2CS\bin\Debug\netcoreapp3.1\BF2CS.dll
+\\pfa.education\utccstudentusers$\18u-rpietras\Documents\Repos\BF2CS\bin\Debug\netcoreapp3.1\BF2CS.pdb
+\\pfa.education\utccstudentusers$\18u-rpietras\Documents\Repos\BF2CS\obj\Debug\netcoreapp3.1\BF2CS.csprojAssemblyReference.cache
+\\pfa.education\utccstudentusers$\18u-rpietras\Documents\Repos\BF2CS\obj\Debug\netcoreapp3.1\BF2CS.AssemblyInfoInputs.cache
+\\pfa.education\utccstudentusers$\18u-rpietras\Documents\Repos\BF2CS\obj\Debug\netcoreapp3.1\BF2CS.AssemblyInfo.cs
+\\pfa.education\utccstudentusers$\18u-rpietras\Documents\Repos\BF2CS\obj\Debug\netcoreapp3.1\BF2CS.csproj.CoreCompileInputs.cache
+\\pfa.education\utccstudentusers$\18u-rpietras\Documents\Repos\BF2CS\obj\Debug\netcoreapp3.1\BF2CS.dll
+\\pfa.education\utccstudentusers$\18u-rpietras\Documents\Repos\BF2CS\obj\Debug\netcoreapp3.1\BF2CS.pdb
+\\pfa.education\utccstudentusers$\18u-rpietras\Documents\Repos\BF2CS\obj\Debug\netcoreapp3.1\BF2CS.genruntimeconfig.cache
