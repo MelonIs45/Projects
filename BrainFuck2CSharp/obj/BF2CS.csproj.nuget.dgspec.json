@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "\\\\pfa.education\\utccstudentusers$\\18u-rpietras\\Documents\\Repos\\BF2CS\\BF2CS.csproj": {}
+    "\\\\pfa.education\\utccstudentusers$\\18U-RPietras\\Documents\\github.com\\MelonIs45\\Projects\\BrainFuck2CSharp\\BF2CS.csproj": {}
   },
   "projects": {
-    "\\\\pfa.education\\utccstudentusers$\\18u-rpietras\\Documents\\Repos\\BF2CS\\BF2CS.csproj": {
+    "\\\\pfa.education\\utccstudentusers$\\18U-RPietras\\Documents\\github.com\\MelonIs45\\Projects\\BrainFuck2CSharp\\BF2CS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "\\\\pfa.education\\utccstudentusers$\\18u-rpietras\\Documents\\Repos\\BF2CS\\BF2CS.csproj",
+        "projectUniqueName": "\\\\pfa.education\\utccstudentusers$\\18U-RPietras\\Documents\\github.com\\MelonIs45\\Projects\\BrainFuck2CSharp\\BF2CS.csproj",
         "projectName": "BF2CS",
-        "projectPath": "\\\\pfa.education\\utccstudentusers$\\18u-rpietras\\Documents\\Repos\\BF2CS\\BF2CS.csproj",
+        "projectPath": "\\\\pfa.education\\utccstudentusers$\\18U-RPietras\\Documents\\github.com\\MelonIs45\\Projects\\BrainFuck2CSharp\\BF2CS.csproj",
         "packagesPath": "C:\\Users\\18u-rpietras\\.nuget\\packages\\",
-        "outputPath": "\\\\pfa.education\\utccstudentusers$\\18u-rpietras\\Documents\\Repos\\BF2CS\\obj\\",
+        "outputPath": "\\\\pfa.education\\utccstudentusers$\\18U-RPietras\\Documents\\github.com\\MelonIs45\\Projects\\BrainFuck2CSharp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"

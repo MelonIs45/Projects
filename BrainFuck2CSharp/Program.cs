@@ -6,60 +6,97 @@ namespace BF2CS
     {
         static void Main(string[] args)
         {
-            string bf = "++++++++++[>+++++++>++++++++++>+++++++++++>+++>+++++++++>++++++++++<<<<<<-]>++.>+.>--..+++.>++.>---.<<.+++.------.>>>.<<+.";
+            // 99 bottles of beer unit test
+            string bf = @">++++++++++[<++++++++++>-]<->>>>>+++[>+++>+++<<-]<<<<+<[>[>+
+                        >+<<-]>>[-<<+>>]++++>+<[-<->]<[[-]>>-<<]>>[[-]<<+>>]<<[[-]>>
+                        >>>>[[-]<++++++++++<->>]<-[>+>+<<-]>[<+>-]+>[[-]<->]<<<<<<<<
+                        <->>]<[>+>+<<-]>>[-<<+>>]+>+<[-<->]<[[-]>>-<<]>>[[-]<<+>>]<<
+                        <[>>+>+<<<-]>>>[-<<<+>>>]++>+<[-<->]<[[-]>>-<<]>>[[-]<<+>>]<
+                        <[>+<[-]]<[>>+<<[-]]>>[<<+>>[-]]<<<[>>+>+<<<-]>>>[-<<<+>>>]+
+                        +++>+<[-<->]<[[-]>>-<<]>>[[-]<<+>>]<<[>+<[-]]<[>>+<<[-]]>>[<
+                        <+>>[-]]<<[[-]>>>++++++++[>>++++++<<-]>[<++++++++[>++++++<-]
+                        >.<++++++++[>------<-]>[<<+>>-]]>.<<++++++++[>>------<<-]<[-
+                        >>+<<]<++++++++[<++++>-]<.>+++++++[>+++++++++<-]>+++.<+++++[
+                        >+++++++++<-]>.+++++..--------.-------.++++++++++++++>>[>>>+
+                        >+<<<<-]>>>>[-<<<<+>>>>]>+<[-<->]<[[-]>>-<<]>>[[-]<<+>>]<<<<
+                        [>>>+>+<<<<-]>>>>[-<<<<+>>>>]+>+<[-<->]<[[-]>>-<<]>>[[-]<<+>
+                        >]<<<[>>+<<[-]]>[>+<[-]]++>>+<[-<->]<[[-]>>-<<]>>[[-]<<+>>]<
+                        +<[[-]>-<]>[<<<<<<<.>>>>>>>[-]]<<<<<<<<<.>>----.---------.<<
+                        .>>----.+++..+++++++++++++.[-]<<[-]]<[>+>+<<-]>>[-<<+>>]+>+<
+                        [-<->]<[[-]>>-<<]>>[[-]<<+>>]<<<[>>+>+<<<-]>>>[-<<<+>>>]++++
+                        >+<[-<->]<[[-]>>-<<]>>[[-]<<+>>]<<[>+<[-]]<[>>+<<[-]]>>[<<+>
+                        >[-]]<<[[-]>++++++++[<++++>-]<.>++++++++++[>+++++++++++<-]>+
+                        .-.<<.>>++++++.------------.---.<<.>++++++[>+++<-]>.<++++++[
+                        >----<-]>++.+++++++++++..[-]<<[-]++++++++++.[-]]<[>+>+<<-]>>
+                        [-<<+>>]+++>+<[-<->]<[[-]>>-<<]>>[[-]<<+>>]<<[[-]++++++++++.
+                        >+++++++++[>+++++++++<-]>+++.+++++++++++++.++++++++++.------
+                        .<++++++++[>>++++<<-]>>.<++++++++++.-.---------.>.<-.+++++++
+                        ++++.++++++++.---------.>.<-------------.+++++++++++++.-----
+                        -----.>.<++++++++++++.---------------.<+++[>++++++<-]>..>.<-
+                        ---------.+++++++++++.>.<<+++[>------<-]>-.+++++++++++++++++
+                        .---.++++++.-------.----------.[-]>[-]<<<.[-]]<[>+>+<<-]>>[-
+                        <<+>>]++++>+<[-<->]<[[-]>>-<<]>>[[-]<<+>>]<<[[-]++++++++++.[
+                        -]<[-]>]<+<]";
 
-            int[] tape = new int[10];
+            byte[] tape = new byte[10000];
+            char[] data = bf.ToCharArray();
             int ptr = 0;
-            int currentPos = 0;
+            int bracketCount = 0;
 
-            translate(ref tape, ref ptr, bf, ref currentPos, 0, 0);
+            translate(ref tape, ref data, ref ptr, ref bracketCount);
 
         }
 
-        static void translate(ref int[] tape, ref int ptr, string bf, ref int currentPos, int bracketPos, int loopCount)
+        static void translate(ref byte[] tape, ref char[] data, ref int ptr, ref int bracketCount)
         {
-            int start = currentPos;
-
-            if (bracketPos != 0)
-                start = bracketPos;
-
-            foreach (char c in bf.Substring(start))
+            for (int i = 0; i < data.Length; i++)
             {
-                Console.WriteLine(ptr + " | " + c + " | " + String.Join(", ", tape));
-                switch (c)
+                switch (data[i])
                 {
-                    case '+':
-                        tape[ptr]++;
-                        currentPos++;
-                        break;
-                    case '-':
-                        tape[ptr]--;
-                        currentPos++;
-                        break;
                     case '>':
                         ptr++;
-                        currentPos++;
                         break;
                     case '<':
                         ptr--;
-                        currentPos++;
+                        break;
+                    case '+':
+                        tape[ptr]++;
+                        break;
+                    case '-':
+                        tape[ptr]--;
                         break;
                     case '.':
-                        //Console.Write(tape[ptr] + " ");
-                        currentPos++;
+                        Console.Write((char)tape[ptr]);
                         break;
-                    case ']':
-                        if (loopCount > 0)
-                        {
-                            translate(ref tape, ref ptr, bf, ref currentPos, bracketPos, loopCount);
-                        }
+                    case ',':
+                        tape[ptr] = (byte)Console.ReadKey().KeyChar;
                         break;
                     case '[':
-                        
-                        for (int v = tape[ptr]; v > 0; v--)
+                        if (tape[ptr] == 0)
                         {
-                            Console.WriteLine($"TAPE PTR HERE IS {v}");
-                            translate(ref tape, ref ptr, bf, ref currentPos, currentPos+1, v);
+                            bracketCount++;
+                            while (data[i] != ']' || bracketCount != 0)
+                            {
+                                i++;
+                                if (data[i] == '[')
+                                    bracketCount++;
+                                else if (data[i] == ']')
+                                    bracketCount--;
+                            }
+                        }
+                        break;
+                    case ']':
+                        if (tape[ptr] != 0)
+                        {
+                            bracketCount++;
+                            while (data[i] != '[' || bracketCount != 0)
+                            {
+                                i--;
+                                if (data[i] == ']')
+                                    bracketCount++;
+                                else if (data[i] == '[')
+                                    bracketCount--;
+                            }
                         }
                         break;
                 }
