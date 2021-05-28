@@ -40,36 +40,31 @@ namespace BF2CS
 
             byte[] tape = new byte[10000];
             char[] data = bf.ToCharArray();
-            int ptr = 0;
+
             int bracketCount = 0;
+            int ptr = 0;
 
-            translate(ref tape, ref data, ref ptr, ref bracketCount);
-
-        }
-
-        static void translate(ref byte[] tape, ref char[] data, ref int ptr, ref int bracketCount)
-        {
             for (int i = 0; i < data.Length; i++)
             {
                 switch (data[i])
                 {
                     case '>':
-                        ptr++;
+                        ptr++; // Increments the value of the tape pointer
                         break;
                     case '<':
-                        ptr--;
+                        ptr--; // Decrements the value of the tape pointer
                         break;
                     case '+':
-                        tape[ptr]++;
+                        tape[ptr]++; // Increments the value of the cell at the pointers position
                         break;
                     case '-':
-                        tape[ptr]--;
+                        tape[ptr]--; // Decrements the value of the cell at the pointers position
                         break;
                     case '.':
-                        Console.Write((char)tape[ptr]);
+                        Console.Write((char)tape[ptr]); // Writes the ASCII character for the value in the cell
                         break;
                     case ',':
-                        tape[ptr] = (byte)Console.ReadKey().KeyChar;
+                        tape[ptr] = (byte)Console.ReadKey().KeyChar; // Sets the value in the cell to a user input
                         break;
                     case '[':
                         if (tape[ptr] == 0)
@@ -77,7 +72,7 @@ namespace BF2CS
                             bracketCount++;
                             while (data[i] != ']' || bracketCount != 0)
                             {
-                                i++;
+                                i++; // Goes to the end of the data
                                 if (data[i] == '[')
                                     bracketCount++;
                                 else if (data[i] == ']')
@@ -91,7 +86,7 @@ namespace BF2CS
                             bracketCount++;
                             while (data[i] != '[' || bracketCount != 0)
                             {
-                                i--;
+                                i--; // Goes back to the start of the first bracket
                                 if (data[i] == ']')
                                     bracketCount++;
                                 else if (data[i] == '[')
