@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Primes
 {
@@ -7,23 +8,28 @@ namespace Primes
     {
         static void Main(string[] args)
         {
-            //> = 2
-            //< = 4
-            //^ = 8
-            //v = 16
-            //val+ = 32
-            //val- = 64
-            //sLoop = 128
-            //eLoop = 256
-            //print = 512
-            //input = 1024
-            //reset = 2048
-            //exit = 0
+            // Exit         0
+            // >            2
+            // <            4
+            // ^            8
+            // v            16
+            // Val +        32
+            // Val -        64
+            // Start Loop   128
+            // End Loop     256
+            // Print        512
+            // Input        1024
+            // Reset        2048
 
+            // Hello World Program
             string input = "32 32 32 32 32 32 32 32 32 32 128 2 32 32 32 32 32 32 32 2 32 32 32 32 32 32 32 32 32 32 2 "
                         + "32 32 32 32 32 32 32 32 32 32 32 2 32 32 32 2 32 32 32 32 32 32 32 32 32 2 "
                         + "32 32 32 32 32 32 32 32 32 32 4 4 4 4 4 4 64 256 2 32 32 512 2 32 512 2 64 64 512 512 32 32 32 "
                         + "512 2 32 32 512 2 64 64 64 512 4 4 512 32 32 32 512 64 64 64 64 64 64 512 2 2 2 512 4 4 32 512 0";
+
+            if (args.Length > 0)
+                input = File.ReadAllText(args[0]);
+
             string[] splitInput = input.Split(' ');
             int[] amountOfFactors = new int[splitInput.Length];
 
@@ -103,6 +109,8 @@ namespace Primes
                         break;
                 }
             }
+
+            Console.ReadLine();
         }
 
         static int[] GetFactors(double num)
