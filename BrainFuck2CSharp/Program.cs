@@ -1,139 +1,107 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 
-namespace Primes
+namespace BF2CS
 {
     class Program
     {
         static void Main(string[] args)
         {
-            // Exit         0
-            // >            2
-            // <            4
-            // ^            8
-            // v            16
-            // Val +        32
-            // Val -        64
-            // Start Loop   128
-            // End Loop     256
-            // Print        512
-            // Input        1024
-            // Reset        2048
+            // 99 bottles of beer unit test, Code written by Jim Crawford.
+            string bfExample = @">++++++++++[<++++++++++>-]<->>>>>+++[>+++>+++<<-]<<<<+<[>[>+
+                        >+<<-]>>[-<<+>>]++++>+<[-<->]<[[-]>>-<<]>>[[-]<<+>>]<<[[-]>>
+                        >>>>[[-]<++++++++++<->>]<-[>+>+<<-]>[<+>-]+>[[-]<->]<<<<<<<<
+                        <->>]<[>+>+<<-]>>[-<<+>>]+>+<[-<->]<[[-]>>-<<]>>[[-]<<+>>]<<
+                        <[>>+>+<<<-]>>>[-<<<+>>>]++>+<[-<->]<[[-]>>-<<]>>[[-]<<+>>]<
+                        <[>+<[-]]<[>>+<<[-]]>>[<<+>>[-]]<<<[>>+>+<<<-]>>>[-<<<+>>>]+
+                        +++>+<[-<->]<[[-]>>-<<]>>[[-]<<+>>]<<[>+<[-]]<[>>+<<[-]]>>[<
+                        <+>>[-]]<<[[-]>>>++++++++[>>++++++<<-]>[<++++++++[>++++++<-]
+                        >.<++++++++[>------<-]>[<<+>>-]]>.<<++++++++[>>------<<-]<[-
+                        >>+<<]<++++++++[<++++>-]<.>+++++++[>+++++++++<-]>+++.<+++++[
+                        >+++++++++<-]>.+++++..--------.-------.++++++++++++++>>[>>>+
+                        >+<<<<-]>>>>[-<<<<+>>>>]>+<[-<->]<[[-]>>-<<]>>[[-]<<+>>]<<<<
+                        [>>>+>+<<<<-]>>>>[-<<<<+>>>>]+>+<[-<->]<[[-]>>-<<]>>[[-]<<+>
+                        >]<<<[>>+<<[-]]>[>+<[-]]++>>+<[-<->]<[[-]>>-<<]>>[[-]<<+>>]<
+                        +<[[-]>-<]>[<<<<<<<.>>>>>>>[-]]<<<<<<<<<.>>----.---------.<<
+                        .>>----.+++..+++++++++++++.[-]<<[-]]<[>+>+<<-]>>[-<<+>>]+>+<
+                        [-<->]<[[-]>>-<<]>>[[-]<<+>>]<<<[>>+>+<<<-]>>>[-<<<+>>>]++++
+                        >+<[-<->]<[[-]>>-<<]>>[[-]<<+>>]<<[>+<[-]]<[>>+<<[-]]>>[<<+>
+                        >[-]]<<[[-]>++++++++[<++++>-]<.>++++++++++[>+++++++++++<-]>+
+                        .-.<<.>>++++++.------------.---.<<.>++++++[>+++<-]>.<++++++[
+                        >----<-]>++.+++++++++++..[-]<<[-]++++++++++.[-]]<[>+>+<<-]>>
+                        [-<<+>>]+++>+<[-<->]<[[-]>>-<<]>>[[-]<<+>>]<<[[-]++++++++++.
+                        >+++++++++[>+++++++++<-]>+++.+++++++++++++.++++++++++.------
+                        .<++++++++[>>++++<<-]>>.<++++++++++.-.---------.>.<-.+++++++
+                        ++++.++++++++.---------.>.<-------------.+++++++++++++.-----
+                        -----.>.<++++++++++++.---------------.<+++[>++++++<-]>..>.<-
+                        ---------.+++++++++++.>.<<+++[>------<-]>-.+++++++++++++++++
+                        .---.++++++.-------.----------.[-]>[-]<<<.[-]]<[>+>+<<-]>>[-
+                        <<+>>]++++>+<[-<->]<[[-]>>-<<]>>[[-]<<+>>]<<[[-]++++++++++.[
+                        -]<[-]>]<+<]";
 
-            // Hello World Program
-            string input = "32 32 32 32 32 32 32 32 32 32 128 2 32 32 32 32 32 32 32 2 32 32 32 32 32 32 32 32 32 32 2 "
-                        + "32 32 32 32 32 32 32 32 32 32 32 2 32 32 32 2 32 32 32 32 32 32 32 32 32 2 "
-                        + "32 32 32 32 32 32 32 32 32 32 4 4 4 4 4 4 64 256 2 32 32 512 2 32 512 2 64 64 512 512 32 32 32 "
-                        + "512 2 32 32 512 2 64 64 64 512 4 4 512 32 32 32 512 64 64 64 64 64 64 512 2 2 2 512 4 4 32 512 0";
+            byte[] tape = new byte[10000];
+            char[] data = bfExample.ToCharArray();
 
             if (args.Length > 0)
-                input = File.ReadAllText(args[0]);
+                data = File.ReadAllText(args[0]).ToCharArray(); // Uses bf code from file if passed in
 
-            string[] splitInput = input.Split(' ');
-            int[] amountOfFactors = new int[splitInput.Length];
-
-            byte[,] tape = new byte[10000, 10000];
             int bracketCount = 0;
-            (int, int) pointer = (0, 0);
+            int ptr = 0;
 
-            for (int i = 0; i < splitInput.Length; i++)
+            for (int i = 0; i < data.Length; i++)
             {
-                amountOfFactors[i] = GetFactors(Convert.ToDouble(splitInput[i])).Length;
-            }
-
-            for (int i = 0; i < amountOfFactors.Length; i++)
-            {
-                switch (amountOfFactors[i])
+                switch (data[i])
                 {
-                    case 0:
-                        Environment.Exit(0);
+                    case '>':
+                        ptr++; // Increments the value of the tape pointer
                         break;
-                    case 1:
-                        pointer.Item1++;
+                    case '<':
+                        ptr--; // Decrements the value of the tape pointer
                         break;
-                    case 2:
-                        pointer.Item1--;
+                    case '+':
+                        tape[ptr]++; // Increments the value of the cell at the pointers position
                         break;
-                    case 3:
-                        pointer.Item2++;
+                    case '-':
+                        tape[ptr]--; // Decrements the value of the cell at the pointers position
                         break;
-                    case 4:
-                        pointer.Item2++;
+                    case '.':
+                        Console.Write((char)tape[ptr]); // Writes the ASCII character for the value in the cell
                         break;
-                    case 5:
-                        tape[pointer.Item1, pointer.Item2]++;
+                    case ',':
+                        tape[ptr] = (byte)Console.ReadKey().KeyChar; // Sets the value in the cell to the user input
                         break;
-                    case 6:
-                        tape[pointer.Item1, pointer.Item2]--;
-                        break;
-                    case 7:
-                        if (tape[pointer.Item1, pointer.Item2] == 0)
+                    case '[':
+                        if (tape[ptr] == 0)
                         {
                             bracketCount++;
-                            while (amountOfFactors[i] != 8 || bracketCount != 0)
+                            while (data[i] != ']' || bracketCount != 0)
                             {
-                                i++;
-                                if (amountOfFactors[i] == 7)
+                                i++; // Goes to the end of the bracket
+                                if (data[i] == '[')
                                     bracketCount++;
-                                else if (amountOfFactors[i] == 8)
+                                else if (data[i] == ']')
                                     bracketCount--;
                             }
                         }
                         break;
-                    case 8:
-                        if (tape[pointer.Item1, pointer.Item2] != 0)
+                    case ']':
+                        if (tape[ptr] != 0)
                         {
                             bracketCount++;
-                            while (amountOfFactors[i] != 7 || bracketCount != 0)
+                            while (data[i] != '[' || bracketCount != 0)
                             {
-                                i--;
-                                if (amountOfFactors[i] == 8)
+                                i--; // Goes back to the start of the bracket
+                                if (data[i] == ']')
                                     bracketCount++;
-                                else if (amountOfFactors[i] == 7)
+                                else if (data[i] == '[')
                                     bracketCount--;
                             }
                         }
-                        break;
-                    case 9:
-                        Console.Write((char)tape[pointer.Item1, pointer.Item2]);
-                        break;
-                    case 10:
-                        tape[pointer.Item1, pointer.Item2] = (byte)Console.ReadKey().KeyChar;
-                        break;
-                    case 11:
-                        tape[pointer.Item1, pointer.Item2] = 0;
-                        break;
-                    default:
-                        Console.WriteLine("FAIL");
                         break;
                 }
             }
-
+            Console.WriteLine("\nPress any character to exit. ");
             Console.ReadLine();
-        }
-
-        static int[] GetFactors(double num)
-        {
-            if (num == 0)
-                return new int[] { };
-
-            List<int> nums = new List<int>();
-            double startNum = num;
-
-            for (int div = 2; div < startNum - 1; div++)
-            {
-                while (num % div == 0)
-                {
-                    nums.Add(div);
-                    num /= div;
-                }
-            }
-
-            if (nums.Count == 0)
-                nums.Add(1);
-
-            return nums.ToArray();
         }
     }
 }
