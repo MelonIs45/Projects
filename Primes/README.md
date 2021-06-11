@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-﻿﻿# Primes
-=======
-﻿# Primes
->>>>>>> 3c77a1043398f2ef49f6f6444086a9b1e7309fe0
+# Primes
 ## A 2D esoteric programming langauge based on the popular [Brainfuck](https://esolangs.org/wiki/Brainfuck) esolang!
 
 ### Usage:
