@@ -35,6 +35,7 @@ namespace Primes
             + "32 32 32 32 32 32 32 32 32 32 8 8 8 8 8 8 64 256 16 32 32 512 16 32 512 16 64 64 512 512 32 32 32 "
             + "512 16 32 32 512 16 64 64 64 512 8 8 512 32 32 32 512 64 64 64 64 64 64 512 16 16 16 512 8 8 32 512 0";
 
+            // NNBOB Program
             string bf = @">++++++++++[<++++++++++>-]<->>>>>+++[>+++>+++<<-]<<<<+<[>[>+
                         >+<<-]>>[-<<+>>]++++>+<[-<->]<[[-]>>-<<]>>[[-]<<+>>]<<[[-]>>
                         >>>>[[-]<++++++++++<->>]<-[>+>+<<-]>[<+>-]+>[[-]<->]<<<<<<<<
@@ -66,14 +67,14 @@ namespace Primes
                         <<+>>]++++>+<[-<->]<[[-]>>-<<]>>[[-]<<+>>]<<[[-]++++++++++.[
                         -]<[-]>]<+<]";
 
-            var line = Regex.Replace(bf.Replace("\t", " "), @"[ ]{2,}", " ").Replace("\r\n", "");
-
-            string primes = BF2Primes(line);
+            string formattedBf = Regex.Replace(bf.Replace("\t", " "), @"[ ]{2,}", " ").Replace("\r\n", "");
+            string primes = BF2Primes(formattedBf);
 
             if (args.Length > 0)
                 input = File.ReadAllText(args[0]);
 
-            string[] splitInput = primes.Split(' ').Where(x => !string.IsNullOrEmpty(x)).ToArray();
+            // To change to the brainfuck code, simply change the `input` variable to `bf`.
+            string[] splitInput = input.Split(' ').Where(x => !string.IsNullOrEmpty(x)).ToArray();
             int[] amountOfFactors = new int[splitInput.Length];
 
             byte[,] tape = new byte[30000, 30000];
@@ -81,9 +82,7 @@ namespace Primes
             (int, int) pointer = (0, 0);
 
             for (int i = 0; i < splitInput.Length; i++)
-            {
                 amountOfFactors[i] = GetFactors(Convert.ToDouble(splitInput[i])).Length;
-            }
 
             for (int i = 0; i < amountOfFactors.Length; i++)
             {
@@ -149,7 +148,7 @@ namespace Primes
                         tape[pointer.Item1, pointer.Item2] = 0;
                         break;
                     default:
-                        Console.WriteLine("FAIL");
+                        Console.WriteLine("FAILED");
                         break;
                 }
             }
