@@ -4,7 +4,7 @@
 ### Usage:
 ##### Operations are based on the numbers that are inputted, if you put in a number for example 143, this number has 2 prime factors, those being 11 and 13, this gives a total of 2 factors; this value is then used as the number to look up against when the final code is interpreted.
 
-### Instruction set:
+### Instruction set (symbols dont mean anything :P):
 | Instruction | # of prime factors |
 |-------------|--------------|
 |`0` halt|`0`|
