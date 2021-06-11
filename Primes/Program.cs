@@ -74,7 +74,7 @@ namespace Primes
                 input = File.ReadAllText(args[0]);
 
             // To change to the brainfuck code, simply change the `input` variable to `bf`.
-            string[] splitInput = input.Split(' ').Where(x => !string.IsNullOrEmpty(x)).ToArray();
+            string[] splitInput = primes.Split(' ').Where(x => !string.IsNullOrEmpty(x)).ToArray();
             int[] amountOfFactors = new int[splitInput.Length];
 
             byte[,] tape = new byte[30000, 30000];
@@ -139,7 +139,7 @@ namespace Primes
                         }
                         break;
                     case 9:
-                        Console.Write((char)tape[pointer.Item1, pointer.Item2]);
+                        ///Console.Write((char)tape[pointer.Item1, pointer.Item2]);
                         break;
                     case 10:
                         tape[pointer.Item1, pointer.Item2] = (byte)Console.ReadKey().KeyChar;
@@ -198,6 +198,8 @@ namespace Primes
             res = res.Replace(",", "1024");
 
             res += "0";
+
+            Console.WriteLine(res);
 
             return res;
         }
